@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dawnette Concetta - Technical Profile</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 1. VARIABEL GLOBAL WARNA */
+        :root {
+            --main-ground: #EFEFEE;
+            --secondary-ground: #E4E4E2;
+            --primary-ink: #0D0D0F;
+            --secondary-ink: #43444A;
+            --muted-ink: #6E6F76;
+            --signal-accent: #2F5BFF;
+            --accent-lift: #7C97FF;
+            --hairline: rgba(13,13,15,0.12);
+            --hairline-light: rgba(239,239,238,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--main-ground);
+            color: var(--primary-ink);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .tech-mono { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; }
+        .display-text { font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; }
+        .pill-btn { border-radius: 50px; border: 1px solid var(--primary-ink); background: transparent; padding: 8px 16px; cursor: pointer; transition: all 0.3s ease; }
+        .pill-btn:hover { background: var(--primary-ink); color: var(--main-ground); box-shadow: 0 0 15px var(--signal-accent); }
+        .pinned-meta { position: absolute; padding: 20px; z-index: 10; color: var(--muted-ink); }
+        .top-left { top: 0; left: 0; }
+        .bottom-left { bottom: 0; left: 0; }
+        .bottom-right { bottom: 0; right: 0; }
+
+        /* 2. NAVIGASI */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 64px;
+            background: rgba(239, 239, 238, 0.82); backdrop-filter: blur(14px);
+            z-index: 100; display: flex; justify-content: space-between;
+            align-items: center; padding: 0 4vw; border-bottom: 1px solid var(--hairline);
+        }
+        .nav-brand { font-weight: 800; font-size: 16px; letter-spacing: -0.035em; }
+        .nav-brand span { color: var(--signal-accent); animation: blink 1.5s infinite; }
+        .nav-links { display: flex; gap: 2vw; align-items: center; }
+        .nav-links a { text-decoration: none; color: inherit; padding-bottom: 2px; position: relative;}
+        
+        /* Animasi Garis Bawah Futuristik di Navigasi */
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0;
+            background-color: var(--signal-accent); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* 3. HERO SECTION */
+        #hero {
+            height: calc(100vh - 64px); margin-top: 64px;
+            background-color: var(--secondary-ground);
+            position: relative; display: flex; padding: 4vw;
+        }
+        .hero-content { 
+            width: 60%; z-index: 10; display: flex; flex-direction: column; justify-content: center;
+        }
+        .hero-headline { font-size: clamp(36px, 5.5vw, 84px); margin: 20px 0; max-width: 18ch; z-index: 10;}
+        .hero-desc { 
+            max-width: 45ch; font-family: 'IBM Plex Mono', monospace; 
+            font-size: 12px; line-height: 1.6; color: var(--secondary-ink); 
+            margin-bottom: 40px; background: rgba(228, 228, 226, 0.6); 
+            padding: 10px; border-radius: 8px; text-transform: none; z-index: 10;
+        }
+        
+        /* BUNGKUSAN GAMBAR DAN EFEK SCANNER */
+        .blended-image-wrapper {
+            position: absolute; bottom: 0; right: 0;
+            width: 50vw; height: 90%; z-index: 1; 
+            overflow: hidden; /* Menjaga efek scanner tidak keluar kotak */
+        }
+        .blended-image-wrapper img {
+            width: 100%; height: 100%; object-fit: cover; object-position: top center;
+        }
+        .blended-image-wrapper::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, transparent 30%, var(--secondary-ground) 75%);
+            z-index: 2;
+        }
+
+        /* Animasi Optical Scanner Line */
+        .scanner-line {
+            position: absolute; left: 0; width: 100%; height: 2px;
+            background: var(--signal-accent);
+            box-shadow: 0 0 15px 3px rgba(47, 91, 255, 0.6); /* Cahaya biru */
+            z-index: 3;
+            animation: scan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        .giant-wordmark {
+            position: absolute; bottom: 8vh; left: 0; width: 100%; 
+            display: flex; justify-content: space-between;
+            font-size: clamp(55px, 14vw, 240px); color: var(--primary-ink); 
+            padding: 0 4vw; z-index: 4; pointer-events: none;
+        }
+
+        /* 4. SECTION DATA CV */
+        .cv-section { padding: 8vw 4vw; background: var(--main-ground); border-bottom: 1px solid var(--hairline-light); }
+        .section-title { font-size: clamp(32px, 5vw, 64px); margin-bottom: 40px; color: var(--signal-accent); }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; }
+        
+        /* Animasi Sequential Boot-up (Daftar muncul satu-satu) */
+        .list-item { 
+            margin-bottom: 30px; border-left: 2px solid var(--primary-ink); padding-left: 20px;
+            opacity: 0; transform: translateY(30px); /* Posisi awal tersembunyi */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .list-item.visible { opacity: 1; transform: translateY(0); } /* Posisi akhir terlihat */
+        
+        .list-item:hover { border-left-color: var(--signal-accent); } /* Efek hover futuristik */
+        .list-title { font-size: 20px; font-weight: 800; margin-bottom: 5px; transition: color 0.3s; }
+        .list-item:hover .list-title { color: var(--signal-accent); }
+        .list-desc { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-ink); line-height: 1.5; }
+
+        /* CLOSING */
+        #closing { padding: 8vw 4vw 0 4vw; background: var(--primary-ink); color: var(--main-ground); position: relative; overflow: hidden; height: 60vh; display: flex; flex-direction: column; justify-content: space-between;}
+        .closing-wordmark { font-size: clamp(84px, 19.5vw, 300px); width: 100%; text-align: center; transform: translateY(0.19em); line-height: 0.74; letter-spacing: -0.055em; color: var(--signal-accent); }
+
+        @media (max-width: 768px) {
+            .hero-content { width: 100%; z-index: 10; }
+            .blended-image-wrapper { right: 0; width: 100%; opacity: 0.3; } 
+            .grid-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KONTROL AUDIO -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 100; display: flex; gap: 10px; align-items: center;">
+        <audio id="bg-audio" loop>
+            <source src="musik-futuristik.mp3" type="audio/mpeg">
+        </audio>
+        <button id="audio-btn" class="pill-btn tech-mono" onclick="toggleMusic()" style="background: var(--main-ground); border-color: var(--hairline);">SOUND: OFF</button>
+    </div>
+
+    <nav>
+        <div class="nav-brand">DAWNETTE<span>_</span></div>
+        <div class="nav-links tech-mono">
+            <a href="#hero">OVERVIEW</a>
+            <a href="#experience">EXPERIENCE</a>
+            <a href="#awards">AWARDS</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero">
+            <div class="pinned-meta top-left tech-mono">MODEL / 001<br>RESEARCH SERIES</div>
+            
+            <div class="hero-content">
+                <span class="tech-mono" style="color: var(--signal-accent);">SYS_INITIALIZED: FIG. 01</span>
+                <!-- Animasi Decode/Scramble diterapkan di sini -->
+                <h1 class="display-text hero-headline decode-text" data-value="IMPACT ORIENTED">IMPACT ORIENTED</h1>
+                <h1 class="display-text hero-headline decode-text" data-value="INNOVATION" style="color: var(--signal-accent); margin-top: -15px;">INNOVATION</h1>
+                <p class="hero-desc">High school student specializing in environmental engineering, material experimentation, and project-based problem solving.</p>
+            </div>
+
+            <!-- FOTO ANDA DENGAN EFEK SCANNER LASER -->
+            <div class="blended-image-wrapper">
+                <div class="scanner-line"></div> <!-- Garis Scanner Biru Futuristik -->
+                <img src="WhatsApp Image 2026-11-10 at 09.20.19.png" alt="Foto Dawnette">
+            </div>
+
+            <div class="display-text giant-wordmark">
+                <span>D</span><span>A</span><span>W</span><span>N</span><span>E</span><span>T</span><span>T</span><span>E</span>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="cv-section">
+            <!-- Teks akan teracak seperti kode matriks sebelum membentuk kata asli -->
+            <h2 class="display-text section-title decode-text" data-value="PROFESSIONAL EXPERIENCE">PROFESSIONAL EXPERIENCE</h2>
+            <div class="grid-container">
+                <div class="list-item">
+                    <div class="list-title">Mandarin Tutor</div>
+                    <div class="list-desc">Provide private Mandarin lessons and support learners' language development.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Mandarin Translator</div>
+                    <div class="list-desc">Complete translation tasks with attention to meaning, context, and clarity.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Photographer & Photoshoot Model</div>
+                    <div class="list-desc">Contribute to creative assignments and visual productions.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Master of Ceremonies</div>
+                    <div class="list-desc">Host events and support audience engagement and event flow.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWARDS SECTION -->
+        <section id="awards" class="cv-section" style="background: var(--secondary-ground);">
+            <h2 class="display-text section-title decode-text" data-value="AWARDS & RECOGNITION" style="color: var(--primary-ink);">AWARDS & RECOGNITION</h2>
+            <div class="grid-container">
+                <div class="list-item">
+                    <div class="list-title">Gold Medal - IDEX Singapore, 2023</div>
+                    <div class="list-desc">International Development and Education Conference for BIMASSTIC project.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Gold Medal - Math Contest, 2024</div>
+                    <div class="list-desc">International Kangaroo Mathematics Contest.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Silver Award - Summit, 2025</div>
+                    <div class="list-desc">Young Change Maker Summit for HYDROSORT project.</div>
+                </div>
+                <div class="list-item">
+                    <div class="list-title">Best Poster & First Place</div>
+                    <div class="list-desc">Best Poster Lomba Peneliti Belia Tingkat Jawa Barat & First Place Penabur Kids Fest, Jakarta, 2023.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="closing">
+            <h2 class="display-text decode-text" data-value="READY FOR INNOVATION." style="font-size: clamp(32px, 5vw, 72px);">READY FOR<br>INNOVATION.</h2>
+            <div class="display-text closing-wordmark">CONCETTA</div>
+        </section>
+    </main>
+
+    <!-- SCRIPT JAVASCRIPT: Mengontrol Animasi -->
+    <script>
+        // 1. LOGIKA AUDIO (Autoplay diatasi dengan klik)
+        const audio = document.getElementById('bg-audio');
+        const audioBtn = document.getElementById('audio-btn');
+
+        function updateAudioBtn() {
+            if (audio.paused) {
+                audioBtn.textContent = 'SOUND: OFF'; audioBtn.style.color = 'inherit';
+            } else {
+                audioBtn.textContent = 'SOUND: ON'; audioBtn.style.color = 'var(--signal-accent)';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => { updateAudioBtn(); }).catch((error) => {
+                    document.body.addEventListener('click', function playOnFirstClick() {
+                        audio.play(); updateAudioBtn();
+                        document.body.removeEventListener('click', playOnFirstClick);
+                    }, { once: true });
+                });
+            }
+        });
+
+        function toggleMusic() {
+            if (audio.paused) audio.play(); else audio.pause();
+            updateAudioBtn();
+        }
+
+        // 2. PARALLAX UNTUK HERO SECTION
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+            if(scrollY < vh) {
+                const giantWord = document.querySelector('.giant-wordmark');
+                giantWord.style.transform = `translateY(${scrollY * -0.15}px)`;
+            }
+        }, { passive: true });
+
+        // 3. ANIMASI DATA DECODE (Teks Mengacak seperti Komputer)
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+        
+        function decodeTextEffect(element) {
+            let iterations = 0;
+            const originalText = element.dataset.value;
+            // Mencegah animasi berjalan ganda
+            if (element.classList.contains('decoded')) return; 
+            
+            const interval = setInterval(() => {
+                element.innerText = originalText.split("").map((letter, index) => {
+                    if (index < iterations || letter === " ") { return originalText[index]; }
+                    return letters[Math.floor(Math.random() * 42)];
+                }).join("");
+                
+                if (iterations >= originalText.length) { 
+                    clearInterval(interval); 
+                    element.classList.add('decoded'); 
+                }
+                iterations += 1 / 3; // Kecepatan efek (semakin kecil, semakin lama acakannya)
+            }, 30);
+        }
+
+        // 4. MENGGUNAKAN INTERSECTION OBSERVER (Animasi terpicu saat di-scroll)
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Jika elemen adalah teks judul, jalankan efek Decode
+                    if (entry.target.classList.contains('decode-text')) {
+                        decodeTextEffect(entry.target);
+                    }
+                    // Jika elemen adalah daftar item, tambahkan kelas 'visible' untuk efek muncul satu-satu
+                    if (entry.target.classList.contains('list-item')) {
+                        // Menambahkan sedikit delay berdasarkan urutannya agar muncul satu persatu
+                        const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 150;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                    }
+                    // Berhenti memantau elemen ini setelah animasinya selesai
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Pasang sensor (Observer) ke semua elemen yang ingin dianimasikan
+        document.querySelectorAll('.decode-text, .list-item').forEach((el) => {
+            scrollObserver.observe(el);
+        });
+
+    </script>
+</body>
+</html>
